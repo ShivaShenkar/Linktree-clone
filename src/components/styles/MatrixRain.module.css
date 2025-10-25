@@ -1,0 +1,9 @@
+/* scoped canvas to fill the viewport without causing scrollbars */
+.matrix-canvas{
+    position: fixed; /* stay behind other content and cover viewport */
+    inset: 0; 
+    display: block; /* remove inline-element baseline gap */
+    background-color: black;
+}
+
+

@@ -3,11 +3,11 @@ import GlassCard from './components/GlassCard.jsx'
 import MatrixRain from './components/MatrixRain.jsx';
 import { Grow } from '@mui/material'
 import eruda from 'eruda';
+import ShareCard from './components/shareCard.jsx';
 
 function App() {
   const containerRef = useRef(null);
   const glassRef = useRef(null);
-  const [initialOrientation, setInitialOrientation] = useState(null);
   const [needsPermission, setNeedsPermission] = useState(false);
 
   async function handlePermissionRequest() {
@@ -60,10 +60,10 @@ function App() {
   };
 
   let linksArr = [
-    { id:1, social: "TikTok", username: "thegoatshiva" },
-    { id:2, social: "Instagram", username: "thegoatshiva" },
-    { id:3, social: "YT", username: "thegoatshiva" },
-    {id:4, social:"LinkedIn", username:"Lior Fikhman"},
+    { id:1, social: "TikTok", username: "thegoatshiva",link:"https://www.tiktok.com/@thegoatshiva" },
+    { id:2, social: "Instagram", username: "lior_fikhman" ,link:"https://www.instagram.com/lior_fikhman/"},
+    { id:3, social: "YT", username: "TheGoatShiva",link:"https://www.youtube.com/@ShivaShenkar-goat" },
+    {id:4, social:"LinkedIn", username:"Lior Fikhman",link:"https://www.linkedin.com/in/lior-fikhman-250371215/"},
   ];
   useEffect(()=>{
       if (window.matchMedia('(pointer: fine)').matches) { 
@@ -113,6 +113,7 @@ function App() {
         </div>
       </Grow>
     </div>
+    <ShareCard username="thegoatshiva" social="TikTok" link="https://www.tiktok.com/@thegoatshiva"/>
     </>  );
 }
 

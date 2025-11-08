@@ -1,14 +1,17 @@
 import styles from "./styles/LinkItem.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
 
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+import { useState } from "react";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
 
 library.add(fas, far, fab)
 
 function LinkItem(props){
+    const [isShareHover,setIsShareHover] = useState(false);
     let faSocial;
     switch(props.social){
         case "TikTok":
@@ -24,11 +27,20 @@ function LinkItem(props){
             faSocial = "fa-linkedin"
     }
     return (
-        <div className={styles.linkItem}>
+        <div className={`${styles.linkItem} ${!isShareHover ? styles.linkAnimation : ""}`} onClick={()=>{
+            if(!isShareHover){
+                window.open(props.link, "_blank");
+            }
+        }
+        }
+
+            >
             <div className={styles.iconAndUsername}>
                 <FontAwesomeIcon icon={`fa-brands ${faSocial} `} size="xl" /> 
                 <p className={styles.linkText}>{props.social} - {props.username}</p>
-                <FontAwesomeIcon className={styles.ellipsisIcon} icon="fa-solid fa-ellipsis-vertical" />
+                <FontAwesomeIcon className={styles.ellipsisIcon} icon="fa-solid fa-ellipsis-vertical" onMouseEnter={()=>{setIsShareHover(true);
+
+                } } onMouseLeave={()=>setIsShareHover(false)} />
             </div>
         </div>
 

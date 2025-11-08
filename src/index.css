@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
   box-sizing: border-box;
@@ -105,7 +106,13 @@ body{
   margin: 4vh auto; /* keep centered and spaced from top on tall screens */
   padding: 0.5rem;
 }
-
+.social-gallery >*{ 
+  text-decoration: none;
+  display: inline-flex;
+}
+.social-gallery >a:hover{
+  cursor: pointer; 
+}
 /* On larger screens prefer a fixed-ish width so layout matches the original design */
 @media (min-width: 1100px) {
   .glass-wrapper{

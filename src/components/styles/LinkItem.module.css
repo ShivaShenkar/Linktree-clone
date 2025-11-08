@@ -11,7 +11,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 .linkItem:hover{
     transform: translate(-1px,-1px);
@@ -23,10 +22,10 @@
     cursor: pointer;
     background-color: rgb(85, 165, 203);
 }
-.linkItem:active{
+.linkAnimation:active{
     transform: translate(3px,5px);
     box-shadow: 1px 1px 0 #36392e;
-    transition: transform 0.1s ,box-shadow 0.1s ;
+    transition: transform 0.1s ,box-shadow 0.1s;
 }
 .iconAndUsername{
     width:calc(100% - 40px);
@@ -37,7 +36,7 @@
 .linkText{
     text-align: center;
     flex:1;
-
+    padding-top:0;
 }
 /* Tablet and mobile adjustments */
 @media (max-width: 768px){
@@ -73,4 +72,10 @@
 } */
 .ellipsisIcon{
     margin-top:4px;
+    height:1.25rem;
+    padding: 0.25rem;
+    border-radius: 50%;
+}
+.ellipsisIcon:hover{
+    background-color: rgba(0, 0, 0, 0.2);
 }

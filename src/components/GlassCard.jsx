@@ -1,7 +1,7 @@
 import { Box} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import color from "color";
-import profilePic from "../assets/shiva_profile_pic.jpg"
+import profilePic from "../assets/png-jpg/shiva_profile_pic.jpg"
 import Links from "./Links.jsx"
 import Avatar from '@mui/material/Avatar';
 import { Grow } from "@mui/material";

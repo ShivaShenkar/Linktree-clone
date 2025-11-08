@@ -3,7 +3,7 @@ import GlassCard from './components/GlassCard.jsx'
 import MatrixRain from './components/MatrixRain.jsx';
 import { Grow } from '@mui/material'
 import eruda from 'eruda';
-import ShareCard from './components/shareCard.jsx';
+import ShareCard from './components/ShareCard.jsx';
 
 function App() {
   const containerRef = useRef(null);
@@ -113,7 +113,6 @@ function App() {
         </div>
       </Grow>
     </div>
-    <ShareCard username="thegoatshiva" social="TikTok" link="https://www.tiktok.com/@thegoatshiva"/>
     </>  );
 }
 

@@ -1,26 +1,69 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Box,Typography} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import {useState} from "react";
+import {useState,useRef,useEffect} from "react";
 import SocialGallery from "./SocialGallery.jsx";
 import styles from "./styles/ShareCard.module.css";
 
-export default function ShareCard({username,social,link}){
+
+export default function ShareCard({username,social,link,className}){
+
     const [isCopied,setIsCopied] = useState(false);
+    const cardRef = useRef(null);
     if(social ==="YT")
         social = "YouTube";
+    useEffect(() => {
+        const card = cardRef.current;
+        if (!card) return;
+        const updateDiagonal = () => {
+          const { width, height } = card.getBoundingClientRect();
+          const diagonal = Math.sqrt(width ** 2 + height ** 2);
+          card.style.setProperty('--card-diagonal', `${diagonal}px`);
+        };
+        updateDiagonal();
+        const observer = new ResizeObserver(updateDiagonal);
+        observer.observe(card);
+        return () => observer.disconnect();
+      }, []);
     return(
-    <Box className={styles.card} sx={{
+    <Box ref={cardRef} className={`${styles.card} ${className}`} sx={{
         position:"fixed",
         width: { xs: "90vw", sm: "70vw", md: "50vw" },
         height: { xs: "auto", sm: "25rem", md: "30rem" },
-        left: { xs: "5vw", sm: "15vw", md: "25vw" },
-        top: { xs: "10vh", sm: "15vh", md: "12.5vh" },
+        // left: { xs: "5vw", sm: "15vw", md: "25vw" },
+        // top: { xs: "10vh", sm: "15vh", md: "12.5vh" },
         maxHeight: "90vh",
+        zIndex:2,
+        "@keyframes rotBGimg":{
+            from:{
+                transform: "rotate(0deg)",
+            },
+            to:{
+                transform: "rotate(360deg)",
+            }
+        },
+        '::before':{
+            content: '""',
+            position: "absolute",
+            border:"1px solid black",
+            backgroundImage: "linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255))",
+            width:"20%",
+            height: "calc(var(--card-diagonal) + 30%)",
+            animation: "rotBGimg 3s linear infinite",
+            transition: "all 0.2s linear",
+            ZIndex:0,
+        },
+        "::after ":{
+            content: "''",
+            position: "absolute",
+            inset: "5px",
+            borderRadius: "15px",
+            ZIndex:1,
+            backgroundColor: "#fff",
+        } 
+
     }}>
-        <div className={styles.blob}></div>
         
-        <div className={styles.bg}></div>
         
         <Box className={styles.content} sx={{
             display:"flex",
@@ -77,6 +120,5 @@ export default function ShareCard({username,social,link}){
 
             <SocialGallery style={{marginBottom:"3rem"}} link={link} username={username} social={social}/>
         </Box>
-    </Box>
-    );
+    </Box>);
 }

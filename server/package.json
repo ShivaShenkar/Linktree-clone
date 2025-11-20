@@ -1,0 +1,12 @@
+{
+  "name": "linktree-clone",
+  "version": "1.0.0",
+  "description": "Clone project of Linktree platform",
+  "license": "ISC",
+  "author": "TheGoatShiva",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}

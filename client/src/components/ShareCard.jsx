@@ -30,8 +30,8 @@ export default function ShareCard({username,social,link,className}){
         position:"fixed",
         width: { xs: "90vw", sm: "70vw", md: "50vw" },
         height: { xs: "auto", sm: "25rem", md: "30rem" },
-        // left: { xs: "5vw", sm: "15vw", md: "25vw" },
-        // top: { xs: "10vh", sm: "15vh", md: "12.5vh" },
+        left: { xs: "5vw", sm: "15vw", md: "25vw" },
+        top: { xs: "10vh", sm: "15vh", md: "12.5vh" },
         maxHeight: "90vh",
         zIndex:2,
         "@keyframes rotBGimg":{

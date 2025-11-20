@@ -12,11 +12,40 @@ body{
   scrollbar-width: none;
 }
 
-
-
-#bio,#username{
-  margin-block:0;
+.app-root{
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-around;
+  height:100vh;
 }
+/* wrapper around the interactive glass card. Controls sizing and perspective for 3D tilt */
+.glass-wrapper{
+  perspective:1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(92vw, 480px); /* responsive width up to a sensible max */
+  max-width: 560px;
+  margin: 4vh auto; /* keep centered and spaced from top on tall screens */
+  padding: 0.5rem;
+}
+
+.permission-button{
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+
 .upper-buttons{
   width:100%;
   display: flex;
@@ -41,13 +70,8 @@ body{
 .pic-and-bio,.links{
   font-family: "DM Sans", sans-serif;
 }
-#bio{
-  margin-top:10px;
-  font-size:16px;
-  font-weight: 500; 
-}
 
-.bio-card{
+/* .bio-card{
   position:fixed;
   left: calc(50% - 290px);
   top: 5vh;
@@ -58,15 +82,15 @@ body{
   background-image: linear-gradient(to bottom,#ddbfbf,#9d9080);
   max-width:580px;
   min-height: 95vh;
-  box-shadow: 5px 0 10px rgb(111, 102, 90,0.2),   /* right side */
-    -5px 0 10px rgb(111, 102, 90,0.2),  /* left side */
-    0 -3px 6px rgb(111, 102, 90,0.15);  /* top side */
+  box-shadow: 5px 0 10px rgb(111, 102, 90,0.2),   
+    -5px 0 10px rgb(111, 102, 90,0.2), 
+    0 -3px 6px rgb(111, 102, 90,0.15);  
 }
 .user-card{
     position:fixed;
     bottom:0;
     left: calc(50% - 290px);
-}
+} */
 .card-content{
   flex:1;
 }
@@ -95,17 +119,7 @@ body{
 .f-link:hover{
   text-decoration: underline;
 }
-/* wrapper around the interactive glass card. Controls sizing and perspective for 3D tilt */
-.glass-wrapper{
-  perspective:1000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: min(92vw, 480px); /* responsive width up to a sensible max */
-  max-width: 560px;
-  margin: 4vh auto; /* keep centered and spaced from top on tall screens */
-  padding: 0.5rem;
-}
+
 .social-gallery >*{ 
   text-decoration: none;
   display: inline-flex;

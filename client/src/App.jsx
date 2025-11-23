@@ -5,28 +5,18 @@ import { Grow } from '@mui/material'
 import eruda from 'eruda';
 import utils from './utilities.jsx'
 
+
+//function to check if permission is needed to access DeviceOrientation API (for iOS 13+ devices)
+function isPermissionNeededMobile() {
+  return (window.matchMedia('(pointer: coarse)').matches && 'DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission === 'function');
+}
+
 function App() {
   const glassRef = useRef(null);
-  const [needsPermission, setNeedsPermission] = useState(false);
-
-  
-
+  const [needsPermission, setNeedsPermission] = useState(isPermissionNeededMobile());
   useEffect(()=>{
-      if (window.matchMedia('(pointer: fine)').matches) { 
-        window.addEventListener('mousemove', utils.handleCardTilt(glassRef));
-        return () => window.removeEventListener('mousemove', utils.handleCardTilt(glassRef));
-      } 
-      if ('DeviceOrientationEvent' in window) {
-        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-          setNeedsPermission(true);
-        } else {
-          // For devices that don't require permission (like Android)
-          utils.setupDeviceOrientation();
-        }
-        return () => window.removeEventListener('deviceorientation', utils.handleOrientation(glassRef));
-      }
-    }
-  ,[]);
+      return utils.deviceTypeSelector(glassRef,setNeedsPermission);
+    },[]);
   return (
     <>
     <script src="node_modules/eruda/eruda.js"></script>

@@ -8,6 +8,12 @@ const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
+// Middleware to set Content-Type: application/json for all routes
+router.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json');
+    next();
+});
+
 router.get("/links", (req, res) => {
     res.json({links: db.links});
 });

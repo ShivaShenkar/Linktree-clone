@@ -21,17 +21,37 @@
 .glass-card > h2{
     color:white;
 }
+.card-avatar{
+    height: 96px !important;
+    width: 96px !important;
+    margin-top: 2rem !important;
+}
+
 @media (max-width: 1024px){
     .glass-card{
         width: min(85vw, 380px);
         padding: 1.5rem;
     }
+    .card-avatar{
+        height: 80px !important;
+        width: 80px !important;
+    }
 }
 
-.card-avatar{
-    height: 96px;
-    width: 96px;
-    margin-top: 2rem;
+@media (max-width: 640px){
+    .card-avatar{
+        height: 64px !important;
+        width: 64px !important;
+        margin-top: 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px){
+    .card-avatar{
+        height: 56px !important;
+        width: 56px !important;
+        margin-top: 1rem !important;
+    }
 }
 .card-bio{
     margin-top:10px;

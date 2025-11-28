@@ -11,26 +11,44 @@ function GlassCard({ bgColor = "#FFF", blur = "10px", ...rest}) {
     const [username,setUsername] = useState("");
     const [bio,setBio] = useState("");
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/username`)
+        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/username`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors'
+        })
         .then(response=>response.json())
         .then(data=>setUsername(data.username))
         .catch(error=>console.error("Error fetching username:",error));
 
-        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/bio`)
+        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/bio`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors'
+        })
         .then(response=>response.json())
         .then(data=>setBio(data.bio))
         .catch(error=>console.error("Error fetching bio:",error));
 
-        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/profile-pic`)
+        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/profile-pic`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'image/jpeg',
+            },
+            mode: 'cors'
+        })
         .catch(error=>console.error("Error fetching profile picture:",error));
         setImageUrl(`${import.meta.env.VITE_SERVER_HOST}/api/profile-pic`);
     },[]);
     return <>
         <Box ref={rest.ref} className = {styles['glass-card']}>
             <Grow in timeout={500}><Avatar src={imageUrl} className={styles['card-avatar']}/></Grow>
-            <Grow in timeout={1000}><h2 className={styles['card-username']}></h2></Grow>
-            <Grow in timeout={1500}><p className={styles['card-bio']}></p></Grow>
-            <Links props={{linksArr:rest.socials,delay:4}}/>      
+            <Grow in timeout={1000}><h2 className={styles['card-username']}>{username}</h2></Grow>
+            <Grow in timeout={1500}><p className={styles['card-bio']}>{bio}</p></Grow>
+            <Links/>      
         </Box>
            
                 

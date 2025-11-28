@@ -1,8 +1,24 @@
 import LinkItem from "./LinkItem";
 import { Grow } from "@mui/material";
+import { useState,useEffect} from "react";
 
 function Links(props){
-    let linkElements = props.linksArr.map((linkObj,ind) => <Grow in timeout={(ind+1+props.delay)*500} key={ind}><div><LinkItem social={linkObj.social} username={linkObj.username} link={linkObj.link} /></div></Grow> );
+    useEffect(()=>{
+        fetch(`${import.meta.env.VITE_SERVER_HOST}/api/links`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        })
+        .then(res=>{return res.json()})
+        .then(data => setLinksArr(data.links))
+        .catch(err=> console.error('Error fetching links: '+err));
+    },[])
+    const [linksArr,setLinksArr] = useState([]);
+    
+    
+    let linkElements = linksArr.map((linkObj,ind) => <Grow in timeout={(ind+4)*500} key={ind}><div><LinkItem social={linkObj.social} username={linkObj.username} link={linkObj.link} /></div></Grow> );
     return (<div className="links" style={{width:"100%"}}>{linkElements}</div>)
 
 }

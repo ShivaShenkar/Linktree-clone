@@ -1,0 +1,64 @@
+.exit-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.exit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.exit-button:hover {
+  background: rgba(255, 77, 77, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(255, 77, 77, 0.3);
+}
+
+.exit-button:hover::before {
+  opacity: 1;
+}
+
+.exit-button:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  font-size: 18px;
+  transition: all 0.3s ease;
+  z-index: 111;
+  position: relative;
+}
+
+.exit-button:hover .icon {
+  color: #ff4d4d;
+  transform: rotate(90deg);
+}
+
+.exit-button:active .icon {
+  transform: rotate(90deg) scale(0.9);
+}
+

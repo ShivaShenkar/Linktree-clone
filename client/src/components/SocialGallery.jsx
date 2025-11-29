@@ -4,15 +4,23 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+import { LinkContext } from "./LinkItem";
+import { useContext} from "react"; 
+
 
 library.add(fas, fab,far);
 
-export default function SocialGallery({style,link,username,social}){
-    const encodedLink = encodeURIComponent(link);
-    const encodedUsername = encodeURIComponent(username);
-    const encodedSocial = encodeURIComponent(social);
+
+
+export default function SocialGallery(){
+    const linkObj = useContext(LinkContext);
+    const encodedLink = encodeURIComponent(linkObj.link);
+    const encodedUsername = encodeURIComponent(linkObj.username);
+    const encodedSocial = encodeURIComponent(linkObj.social);
     return (
-        <div className="social-gallery" style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around",gap:"1rem",...style}}>
+        <>
+        
+        <div className="social-gallery" style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around",gap:"1rem"}}>
             <a href={`https://x.com/intent/tweet?text=Check%20out%20the%20${encodedSocial}%20of%20${encodedUsername}!%20${encodedLink}`} target="_blank" rel="noopener noreferrer">
                 <Avatar src="/src/assets/png-jpg/X.jpg" />
             </a>
@@ -41,5 +49,6 @@ export default function SocialGallery({style,link,username,social}){
                 </Avatar>
             </a>
         </div>
+        </>
     )
 }

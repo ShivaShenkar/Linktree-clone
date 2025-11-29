@@ -1,17 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Box,Typography} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import {useState,useRef,useEffect} from "react";
+import {useState,useRef,useEffect,useContext} from "react";
 import SocialGallery from "./SocialGallery.jsx";
 import styles from "./styles/ShareCard.module.css";
+import {LinkContext} from "./LinkItem.jsx";
+import ExitButton from "./ExitButton.jsx";
 
-
-export default function ShareCard({username,social,link,className}){
+export default function ShareCard({onExit}){
+    const linkObj = useContext(LinkContext);
+    
 
     const [isCopied,setIsCopied] = useState(false);
     const cardRef = useRef(null);
-    if(social ==="YT")
-        social = "YouTube";
     useEffect(() => {
         const card = cardRef.current;
         if (!card) return;
@@ -26,88 +27,30 @@ export default function ShareCard({username,social,link,className}){
         return () => observer.disconnect();
       }, []);
     return(
-    <Box ref={cardRef} className={`${styles.card} ${className}`} sx={{
-        position:"fixed",
+    
+    <Box ref={cardRef} className={`${styles.card}`} sx={{
         width: { xs: "90vw", sm: "70vw", md: "50vw" },
         height: { xs: "auto", sm: "25rem", md: "30rem" },
         left: { xs: "5vw", sm: "15vw", md: "25vw" },
-        top: { xs: "10vh", sm: "15vh", md: "12.5vh" },
-        maxHeight: "90vh",
-        zIndex:2,
-        "@keyframes rotBGimg":{
-            from:{
-                transform: "rotate(0deg)",
-            },
-            to:{
-                transform: "rotate(360deg)",
-            }
-        },
-        '::before':{
-            content: '""',
-            position: "absolute",
-            border:"1px solid black",
-            backgroundImage: "linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255))",
-            width:"20%",
-            height: "calc(var(--card-diagonal) + 30%)",
-            animation: "rotBGimg 3s linear infinite",
-            transition: "all 0.2s linear",
-            ZIndex:0,
-        },
-        "::after ":{
-            content: "''",
-            position: "absolute",
-            inset: "5px",
-            borderRadius: "15px",
-            ZIndex:1,
-            backgroundColor: "#fff",
-        } 
-
-    }}>
+        top: { xs: "10vh", sm: "15vh", md: "12.5vh" },}}>
+        <ExitButton onExit={onExit} className={styles['exit-button']}/>
         
         
-        <Box className={styles.content} sx={{
-            display:"flex",
-            flexDirection:"column",
-            alignItems:"center",
-            justifyContent:"space-around",
-            padding: { xs: "1rem", sm: "1.5rem", md: "2rem" },
-            overflow: "auto",
-            borderRadius: "10px",
+        <Box className={styles['content']} sx={{padding: { xs: "1rem", sm: "1.5rem", md: "2rem" },
+        "::before":{
+            height: `calc(sqrt(pow(50vw, 2) + pow(30rem, 2)))`,
+        }
         }}>
-            <Typography sx={{
-                fontSize: { xs: "1.5rem", sm: "2.5rem", md: "4rem" },
-                fontFamily:"Roboto,sans-serif",
-                fontWeight:"200",
-                fontStyle:"italic",
-                textAlign: "center",
-                lineHeight: 1.2
-            }}>Share the link of {username} on {social}</Typography>
-            <Box className={isCopied ? styles.copied : ""} sx={{
-                display: "flex", 
-                alignItems: "center", 
-                gap: 1, 
-                whiteSpace: "nowrap", 
-                marginBottom: { xs: "1rem", sm: "2rem", md: "3rem" },
-                flexWrap: "wrap",
-                justifyContent: "center"
-            }}>
-                <Typography sx={{
-                    fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" },
-                    fontFamily:"Roboto,sans-serif",
-                    fontWeight:"200",
-                    fontStyle:"italic",
-                    wordBreak: "break-all"
-                }}>{link}</Typography>
-            <Tooltip
-                title="Copied!"
-                arrow
-                placement="top"
-                open={isCopied}
-                disableFocusListener
-                disableHoverListener
-                disableTouchListener
-            >
-                <Box component="span" sx={{display: "inline-flex", cursor: "pointer"}} onClick={()=>{
+            
+            <Typography className={styles.title} sx={{fontSize: { xs: "1.5rem", sm: "2.5rem", md: "4rem" }}}>
+                Share the link of {linkObj.username} on {linkObj.social}
+            </Typography>
+            <Box className={`${styles['link-row']}`} sx={{marginBottom: { xs: "1rem", sm: "2rem", md: "3rem" }}}>
+                <Typography className={styles['link-text']} sx={{fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" }}}>
+                    {linkObj.link}
+                </Typography>
+            <Tooltip title="Copied!" arrow placement="top" open={isCopied} disableFocusListener disableHoverListener disableTouchListener>
+                <Box component="span" className={styles['copy-icon']} onClick={()=>{
                     setIsCopied(true);
                     navigator.clipboard.writeText(link);
                     window.clearTimeout(window.__copiedTimer);
@@ -117,8 +60,7 @@ export default function ShareCard({username,social,link,className}){
                 </Box>
             </Tooltip>
             </Box>
-
-            <SocialGallery style={{marginBottom:"3rem"}} link={link} username={username} social={social}/>
+            <SocialGallery/>
         </Box>
     </Box>);
 }

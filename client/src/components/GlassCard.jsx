@@ -54,6 +54,6 @@ function GlassCard({ bgColor = "#FFF", blur = "10px", ...rest}) {
                 
     </>;
 }
-
+ 
 export default GlassCard;
 Reflect

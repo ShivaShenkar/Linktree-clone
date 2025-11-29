@@ -1,5 +1,11 @@
+exit-button{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+}
 .card {
-    position: relative;
+    position: fixed;
     border-radius: 14px;
     overflow: hidden;
     z-index: 1;
@@ -7,7 +13,20 @@
     display: flex;
     place-content: center;
     place-items: center;
+    max-height:90vh;
+    z-index:2;
+
+
+}
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
   }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 
   .card::before {
     content: '';
@@ -15,34 +34,62 @@
     border:1px solid black;
     background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
     width:20%;
-    height: calc(sqrt(pow(50vw, 2) + pow(30rem, 2)));
+    height: calc(var(--card-diagonal) + 30%);
     animation: rotBGimg 3s linear infinite;
     transition: all 0.2s linear;
-    
   }
-  @keyframes rotBGimg {
-    from {
-      transform: rotate(0deg);
-    }
   
-    to {
-      transform: rotate(360deg);
-    }
-  }
   
   .card::after {
     content: '';
     position: absolute;
     inset: 5px;
     border-radius: 15px;
-
+    z-index:1;
+    background-color: #fff;
   } 
 
   
   .content {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     position: relative;
+    justify-content:space-around;
     z-index: 3;
+    overflow: auto;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-family: Roboto, sans-serif !important;
+    font-weight: 200 !important; 
+    font-style: italic !important;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .link-row {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .link-text {
+    font-family: Roboto, sans-serif !important;
+    font-weight: 200 !important;
+    font-style: italic !important;
+    word-break: break-all;
+  }
+  
+  .copy-icon {
+    display: inline-flex;
+    cursor: pointer;
   }
 
+ 

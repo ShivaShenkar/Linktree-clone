@@ -4,6 +4,8 @@ import MatrixRain from './components/MatrixRain.jsx';
 import { Grow } from '@mui/material'
 import eruda from 'eruda';
 import utils from './utilities.jsx'
+import ReactDOM from "react-dom"
+import React from "react"
 
 
 //function to check if permission is needed to access DeviceOrientation API (for iOS 13+ devices)

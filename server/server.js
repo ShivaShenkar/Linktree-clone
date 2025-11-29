@@ -1,5 +1,4 @@
 import express from "express";
-import { db } from './src/data/db.js'
 import linksRouter from "./src/routes/links.routes.js";
 import dotenv from "dotenv"
 import https from "https";

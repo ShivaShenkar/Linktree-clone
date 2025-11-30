@@ -50,7 +50,7 @@ export default function ShareCard({onExit}){
         }}>
             
             <Typography className={styles.title} sx={{
-                fontSize: { xs: "1rem", sm: "1.75rem", md: "3.5rem", lg: "4rem", xl: "4.5rem" },
+                fontSize: { xs: "1rem", sm: "2.5rem", md: "3rem",lg: "3.5rem"},
                 lineHeight: { xs: "1.3", sm: "1.3", md: "1.2" }
             }}>
                 Share the link of {linkObj.username} on {linkObj.social}

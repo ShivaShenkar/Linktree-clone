@@ -8,6 +8,13 @@ import { LinkContext } from "./LinkItem";
 import { useContext} from "react"; 
 
 
+import xIcon from "../assets/png-jpg/socialGallery/X.jpg";
+import facebookIcon from "../assets/png-jpg/socialGallery/facebook.png";
+import whatsappIcon from "../assets/svg/whatsapp.svg";
+import linkedinIcon from "../assets/png-jpg/socialGallery/LinkedIn.png";
+import messengerIcon from "../assets/png-jpg/socialGallery/messanger.png";
+import snapchatIcon from "../assets/png-jpg/socialGallery/snapchat.jpg";
+
 library.add(fas, fab,far);
 
 
@@ -22,26 +29,26 @@ export default function SocialGallery(){
         
         <div className="social-gallery" style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center",gap:"0.5rem",flexWrap:"wrap",maxWidth:"100%",boxSizing:"border-box",padding:"0 0.5rem"}}>
             <a href={`https://x.com/intent/tweet?text=Check%20out%20the%20${encodedSocial}%20of%20${encodedUsername}!%20${encodedLink}`} target="_blank" rel="noopener noreferrer">
-                <Avatar src="/src/assets/png-jpg/socialGallery/X.jpg" />
+                <Avatar src={xIcon}/>
             </a>
             <a href={`https://www.facebook.com/socialGallery/sharer.php?u=${encodedLink}`} target="_blank" rel="noopener noreferrer">
                 <Avatar src="/src/assets/png-jpg/socialGallery/facebook.png" />
             </a>
             <a href={`https://wa.me/?text=Check%20out%20the%20${encodedSocial}%20of%20${encodedUsername}!%20${encodedLink}`} target="_blank" rel="noopener noreferrer">
                 <Avatar>
-                    <img src="/src/assets/svg/whatsapp.svg" style={{width:"120%",height:"120%"}} />
+                    <img src={whatsappIcon} style={{width:"120%",height:"120%"}} />
                 </Avatar>
             </a>
             <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedLink}`} target="_blank" rel="noopener noreferrer">
-                <Avatar src="/src/assets/png-jpg/socialGallery/LinkedIn.png" />
+                <Avatar src={linkedinIcon} />
             </a>
             <a href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer">
-                <Avatar src="/src/assets/png-jpg/socialGallery/messanger.png" slotProps={{img:{
+                <Avatar src={messengerIcon} slotProps={{img:{
                     style: { transform: 'scale(0.7)', transformOrigin: 'center' } 
                 }}}/>
             </a>
             <a href={`snapchat://creativeKitWeb/camera/1?attachmentUrl=${encodedLink}`} target="_blank" rel="noopener noreferrer">
-                <Avatar src="/src/assets/png-jpg/socialGallery/snapchat.jpg" />
+                <Avatar src={snapchatIcon} />
             </a>
             <a href={`mailto:?subject=Check%20out%20the%20${encodedSocial}%20of%20${encodedUsername}!%20${encodedLink}`}>
                 <Avatar>

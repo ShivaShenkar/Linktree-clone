@@ -37,7 +37,6 @@ function LinkItem(props) {
     }, [isShareClicked]);
     const faSocial = `fa-${props.social.toLowerCase()}`;
     const findIconObj = findIconDefinition({ iconName: faSocial });
-    console.log(findIconObj)
     const isIconAvailable = (findIconObj !== undefined);
     
 

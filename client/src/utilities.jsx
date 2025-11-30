@@ -1,27 +1,29 @@
 /**
+ * Checks if permission is needed to access DeviceOrientation API (for iOS 13+ devices)
+ * @returns {boolean} - True if permission is needed, false otherwise
+ */
+export function isPermissionNeededMobile() {
+  return (window.matchMedia('(pointer: coarse)').matches && 'DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission === 'function');
+}
+
+/**
  * Handles the permission  request (if needed) for the mobile device orientation API
  * @param {Function} setNeedsPermission - Function to update the state indicating if permission is needed
- * @returns {boolean} - True if the permission is granted, false otherwise
+ * @returns {Promise<boolean>} - True if the permission is granted, false otherwise
  */
-export async function handleMobilePermissionRequest(setNeedsPermission) {
+export  async function handleMobilePermissionRequest(setNeedsPermission){
   //if permission is needed (iOS 13+)
   if (typeof DeviceOrientationEvent.requestPermission === 'function') {
     try {
       const response = await DeviceOrientationEvent.requestPermission();
       setNeedsPermission(false);
-      if (response !== 'granted') {
-        return false;
-      }
+
     } catch (error) {
       console.error('Error requesting permission:', error);
-      setNeedsPermission(false);
-      return false;
     }
   }
-  //if permission is granted or not needed, we start using the Mobile Device Orientation API
-  return true;
-
 }
+
 
 
 
@@ -72,7 +74,8 @@ export const handleMobileCardOrientation = (cardRef) => {
     };
 };
 
-export const deviceTypeSelector = (cardRef,setNeedsPermission) =>{
+export function deviceTypeSelector(cardRef,needsPermission){
+  console.log(cardRef.current.style);
   //if Device has a pointer:fine (mouse,mousepad,stylus)
   if (window.matchMedia('(pointer: fine)').matches) { 
     window.addEventListener('mousemove', handleMouseCardTilt(cardRef));
@@ -80,15 +83,18 @@ export const deviceTypeSelector = (cardRef,setNeedsPermission) =>{
   } 
   //else if device has a pointer:coarse (touchscreen) and supports DeviceOrientationEvent API (Mobile,Tablet)
   if (window.matchMedia('(pointer: coarse)').matches && 'DeviceOrientationEvent' in window) {
-    isPermitted = handleMobilePermissionRequest(setNeedsPermission);
-    if(isPermitted){
+    // Check if permission is already granted
+    if (!needsPermission) {
       window.addEventListener('deviceorientation', handleMobileCardOrientation(cardRef));
-      return () => window.removeEventListener('deviceorientation', handleMobileCardOrientation(cardRef));
+      return () => window.removeEventListener('deviceorientation', handleMobileCardOrientation);
     }
   }
-  return null;
+  return undefined;
+  
 }
 
 
-export default {handleMobilePermissionRequest,handleMouseCardTilt,handleMobileCardOrientation,deviceTypeSelector}
+
+
+export default {isPermissionNeededMobile,handleMobilePermissionRequest,handleMouseCardTilt,handleMobileCardOrientation,deviceTypeSelector}
 

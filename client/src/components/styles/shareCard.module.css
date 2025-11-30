@@ -1,20 +1,21 @@
-exit-button{
+.exit-button{
   position: absolute;
   top: 1rem;
   right: 1rem;
-  z-index: 3;
+  z-index: 10;
+  pointer-events: auto;
 }
 .card {
     position: fixed;
     border-radius: 14px;
     overflow: hidden;
-    z-index: 1;
     background-color: #fff;
     display: flex;
     place-content: center;
     place-items: center;
     max-height:90vh;
-    z-index:2;
+    max-width: 95vw;
+    z-index: 1000; /* Higher than backdrop to appear on top */
 
 
 }
@@ -47,6 +48,7 @@ exit-button{
     border-radius: 15px;
     z-index:1;
     background-color: #fff;
+    pointer-events: none;
   } 
 
   
@@ -57,10 +59,11 @@ exit-button{
     position: relative;
     justify-content:space-around;
     z-index: 3;
-    overflow: auto;
+    overflow: hidden;
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    box-sizing: border-box;
   }
   
   .title {
@@ -69,15 +72,22 @@ exit-button{
     font-style: italic !important;
     text-align: center;
     line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.5rem;
   }
   
   .link-row {
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    white-space: nowrap;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.5rem;
   }
   
   .link-text {
@@ -85,11 +95,46 @@ exit-button{
     font-weight: 200 !important;
     font-style: italic !important;
     word-break: break-all;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .copy-icon {
     display: inline-flex;
     cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .social-gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.5rem;
+  }
+
+  .social-gallery a {
+    flex-shrink: 0;
+  }
+
+  .social-gallery .MuiAvatar-root {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  @media (max-width: 600px) {
+    .social-gallery .MuiAvatar-root {
+      width: 2rem !important;
+      height: 2rem !important;
+    }
+    .social-gallery {
+      gap: 0.25rem;
+    }
   }
 
  

@@ -30,29 +30,39 @@ export default function ShareCard({onExit}){
     
     <Box ref={cardRef} className={`${styles.card}`} sx={{
         width: { xs: "90vw", sm: "70vw", md: "50vw" },
+        maxWidth: { xs: "90vw", sm: "70vw", md: "50vw" },
         height: { xs: "auto", sm: "25rem", md: "30rem" },
+        maxHeight: { xs: "85vh", sm: "85vh", md: "85vh" },
         left: { xs: "5vw", sm: "15vw", md: "25vw" },
-        top: { xs: "10vh", sm: "15vh", md: "12.5vh" },}}>
+        top: { xs: "10vh", sm: "15vh", md: "12.5vh" },
+        right: { xs: "5vw", sm: "15vw", md: "25vw" },
+        boxSizing: "border-box",
+        overflow: "hidden"}}>
         <ExitButton onExit={onExit} className={styles['exit-button']}/>
         
         
-        <Box className={styles['content']} sx={{padding: { xs: "1rem", sm: "1.5rem", md: "2rem" },
-        "::before":{
-            height: `calc(sqrt(pow(50vw, 2) + pow(30rem, 2)))`,
-        }
+        <Box className={styles['content']} sx={{
+            padding: { xs: "1rem", sm: "1.5rem", md: "2rem" },
+            boxSizing: "border-box",
+            "::before":{
+                height: `calc(sqrt(pow(50vw, 2) + pow(30rem, 2)))`,
+            }
         }}>
             
-            <Typography className={styles.title} sx={{fontSize: { xs: "1.5rem", sm: "2.5rem", md: "4rem" }}}>
+            <Typography className={styles.title} sx={{
+                fontSize: { xs: "1rem", sm: "1.75rem", md: "3.5rem", lg: "4rem", xl: "4.5rem" },
+                lineHeight: { xs: "1.3", sm: "1.3", md: "1.2" }
+            }}>
                 Share the link of {linkObj.username} on {linkObj.social}
             </Typography>
             <Box className={`${styles['link-row']}`} sx={{marginBottom: { xs: "1rem", sm: "2rem", md: "3rem" }}}>
-                <Typography className={styles['link-text']} sx={{fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" }}}>
+                <Typography className={styles['link-text']} sx={{fontSize: { xs: "0.75rem", sm: "1rem", md: "1.75rem", lg: "2rem", xl: "2.25rem" }}}>
                     {linkObj.link}
                 </Typography>
             <Tooltip title="Copied!" arrow placement="top" open={isCopied} disableFocusListener disableHoverListener disableTouchListener>
                 <Box component="span" className={styles['copy-icon']} onClick={()=>{
                     setIsCopied(true);
-                    navigator.clipboard.writeText(link);
+                    navigator.clipboard.writeText(linkObj.link);
                     window.clearTimeout(window.__copiedTimer);
                     window.__copiedTimer = window.setTimeout(()=> setIsCopied(false), 1200);
                 }}>

@@ -15,7 +15,6 @@
   justify-content: center;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
   overflow: hidden;
 }
 
@@ -30,6 +29,7 @@
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .exit-button:hover {

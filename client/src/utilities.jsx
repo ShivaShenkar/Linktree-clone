@@ -32,13 +32,34 @@ export const handleMouseCardTilt = (cardRef) => {
     const windowHeight = window.innerHeight;
     const centerX = windowWidth/2;
     const centerY = windowHeight/2;
-    
-    const rotateX = ((e.clientY - centerY) / centerY) * 10; 
-    const rotateY = ((e.clientX - centerX) / centerX) * 10;
-    
-    if (cardRef.current) {
-        cardRef.current.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+
+    const linksElement = cardRef.current?.querySelector('.links');
+    if (linksElement) {
+      const linksRect = linksElement.getBoundingClientRect();
+      const linksStartY = linksRect.top;      // Starting y position
+      const linksEndY = linksRect.bottom;
+      var rotateX;
+      if(e.clientY<linksStartY)
+        rotateX = ((e.clientY - linksStartY) / linksStartY) * 10;
+      else if(e.clientY>linksEndY)
+        rotateX = ((e.clientY - linksEndY) / linksEndY) * 10;
+      else
+        rotateX = 0;
+      const rotateY = ((e.clientX - centerX) / centerX) * 10;
+
+      if (cardRef.current) {
+          cardRef.current.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      }  
     }
+    else{
+      const rotateX = ((e.clientY - centerY) / centerY) * 10;
+      const rotateY = ((e.clientX - centerX) / centerX) * 10;
+
+      if (cardRef.current) {
+          cardRef.current.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      }
+    }
+    
   };
 };
 

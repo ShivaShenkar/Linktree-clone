@@ -6,9 +6,9 @@ import styles from "./styles/ExitButton.module.css"
 library.add(fas)
 
 function ExitButton({ onExit,className }) {
-  const otherClasses = (className ? className : null);
+  const otherClasses = (className ? ` ${className}` : '');
   return (
-    <button onClick={onExit} className={styles['exit-button'] +otherClasses} aria-label="Close">
+    <button onClick={onExit} className={styles['exit-button'] + otherClasses} aria-label="Close">
       <FontAwesomeIcon icon="fa-solid fa-xmark" className={styles.icon} />
     </button>
   );

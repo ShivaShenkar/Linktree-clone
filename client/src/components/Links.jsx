@@ -16,8 +16,8 @@ function Links(){
         .then(data => setLinksArr(data.links))
         .catch(err=> console.error('Error fetching links: '+err));
     },[]);
-    
-    let linkElements = linksArr.map((linkObj,ind) => <Grow in timeout={(ind+4)*500} key={ind}><div><LinkItem props={{social:linkObj.social,username:linkObj.username,link:linkObj.link}}/></div></Grow> );
+     
+    let linkElements = linksArr.map((linkObj,ind) => <Grow in timeout={(ind+4)*500} key={ind}><div><LinkItem social={linkObj.social} username={linkObj.username} link={linkObj.link}/></div></Grow> );
     return (
         <div className="links" style={{width:"100%"}}>{linkElements}</div>
     );

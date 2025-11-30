@@ -80,3 +80,16 @@
 .ellipsisIcon:hover{
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker gray background */
+  backdrop-filter: blur(4px); /* Blur effect */
+  z-index: 999; /* High z-index to cover everything including MatrixRain */
+  cursor: pointer;
+  pointer-events: auto;
+}

@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "test": "test"
+    "test": "test",
+    "start": "node server.js"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

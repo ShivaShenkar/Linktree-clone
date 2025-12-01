@@ -11,6 +11,11 @@ const app = express();
 const PORT = process.env.PORT;
 const ALLOWED_ORIGIN = process.env.CLIENT_HOST;
 
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
@@ -20,12 +25,12 @@ app.use((req, res, next) => {
 });
 app.use("/api", linksRouter);
 
-const key = fs.readFileSync("certs/localhost+2-key.pem");
-const cert = fs.readFileSync("certs/localhost+2.pem");
+// const key = fs.readFileSync("certs/localhost+2-key.pem");
+// const cert = fs.readFileSync("certs/localhost+2.pem");
 
-https.createServer({ key, cert }, app).listen(PORT, '0.0.0.0',() => {
-  console.log(`HTTPS server on https://localhost:${PORT}`);
-});
-// app.listen(PORT, () => {
-//     console.log(`Server is now listening on http://localhost:${PORT}`);
+// https.createServer({ key, cert }, app).listen(PORT, '0.0.0.0',() => {
+//   console.log(`HTTPS server on https://localhost:${PORT}`);
 // });
+app.listen(PORT, () => {
+    console.log(`Server is now listening on http://localhost:${PORT}`);
+});

@@ -21,8 +21,8 @@ function App() {
 
   return (
     <>
-    <script src="node_modules/eruda/eruda.js"></script>
-    <script>{eruda.init()}</script>
+    {/* <script src="node_modules/eruda/eruda.js"></script>
+    <script>{eruda.init()}</script> */}
     <MatrixRain/>
     {needsPermission && 
       <button className='permission-button' onClick={handlePermissionClick}>

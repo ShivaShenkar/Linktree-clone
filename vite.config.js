@@ -12,11 +12,10 @@ export default defineConfig({
     react(),
     basicSsl()
   ],
-  // server: {
-  //   host: true
-  // }
+
   server: {
     // https: true,
+    host:true,
     hmr: {
       protocol: "wss",
       host: "localhost",

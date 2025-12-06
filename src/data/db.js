@@ -1,4 +1,4 @@
-export const db ={
+export default {
     username:"thegoatshiva",
     bio:"Be yourself, everyone else is already taken.",
     links:[
@@ -8,4 +8,4 @@ export const db ={
         {id:4, social:"LinkedIn", username:"Lior Fikhman",link:"https://www.linkedin.com/in/lior-fikhman-250371215/"},
     ]
 
-}   
+};
